@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<h1>TradingView</h1>
+<form action="/">
+    <label>
+        <input type="text" name="symbol" value="<%= symbol %>"/>
+    </label>
+    <input type="submit" value="Search"/>
+</form>
+
+<% if(symbol) { %>
+
+
+    <div style="margin: 20px 0;">Info</div>
+
+    <%= JSON.stringify(info) %>
+
+    <div style="margin: 20px 0;">Prices periods</div>
+
+    <%= JSON.stringify(price_periods) %>
+
+
+    <div style="margin: 20px 0;">Study periods: ID: PUB;a02143ac7305490e9d0ac6d7c48e8493 => MarkMiddleton2020</div>
+
+    <%= JSON.stringify(study_periods) %>
+
+<% } %>
+
+</body>
+</html>
