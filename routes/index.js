@@ -27,20 +27,22 @@ router.get('/', async (req, res, next) => {
         timeframe: 'M'
     });
 
-    TradingView.getIndicator('PUB;a02143ac7305490e9d0ac6d7c48e8493').then(async (indic) => {
+    await TradingView.getIndicator('PUB;a02143ac7305490e9d0ac6d7c48e8493').then(async (indic) => {
         console.log(`Loading '${indic.description}' study...`);
         const SUPER_TREND = new chart.Study(indic);
 
         SUPER_TREND.onUpdate(() => {
             console.log('Prices periods:', chart.periods);
-            console.log('Study periods:', SUPER_TREND.periods);
-            return res.render('index', {
-                title: 'Express',
-                info: chart.infos,
-                price_periods: chart.periods,
-                study_periods: SUPER_TREND.periods,
-                symbol: req.query.symbol,
-            });
+            console.log('Study periods:', SUPER_TREND.periods)
+            client.end().then(() => {
+                return res.render('index', {
+                    title: 'Express',
+                    info: chart.infos,
+                    price_periods: chart.periods,
+                    study_periods: SUPER_TREND.periods,
+                    symbol: req.query.symbol,
+                })
+            })
         });
     });
 });
