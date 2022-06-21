@@ -24,7 +24,7 @@ router.get('/', async (req, res, next) => {
 
 
     chart.setMarket(`BINANCE:${req.query.symbol}`, {
-        timeframe: 'M'
+        timeframe: 'D'
     });
 
     await TradingView.getIndicator('PUB;a02143ac7305490e9d0ac6d7c48e8493').then(async (indic) => {
